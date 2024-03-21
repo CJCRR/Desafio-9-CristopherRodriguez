@@ -1,4 +1,8 @@
-// authMiddleware.js
+import config from '../../config/config.js';
+
+const adminEmail = config.adminEmail;
+const adminPassword = config.adminPassword;
+
 const isAuthenticated = (req, res, next) => {
     if (req.session.user) {
         next();
@@ -17,7 +21,7 @@ const isAdmin = (req, res, next) => {
 
 const hasAdminCredentials = (email, password) => {
     // Verificar si las credenciales coinciden con las del administrador
-    return email === 'adminCJCRR@coder.com' && password === 'adminCJCRR123';
+    return email === adminEmail && password === adminPassword;
 };
 
 export { isAuthenticated, isAdmin, hasAdminCredentials };

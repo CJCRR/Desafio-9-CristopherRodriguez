@@ -1,4 +1,4 @@
-import MessagesManager from "../dao/mongooseManager/messages.dao.js";
+import MessagesManager from "../dao/manager/messages.dao.js";
 const messagesManager = new MessagesManager();
 
 const socketChat = (socketServer) => {

@@ -1,8 +1,5 @@
 import { Router } from 'express';
-//import ProductManager from "../dao/mongooseManager/products.dao.js"
 import productModel from '../dao/models/products.model.js';
-
-//const pm = new ProductManager()
 
 const Product = productModel();
 const filePathProducts = './src/productos.json';
@@ -43,7 +40,6 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Error al leer el archivo' });
   }
 });
-
 
 // Ruta GET /api/products/:pid - Traer sólo el producto con el id proporcionado
 router.get("/:pid", async (req, res) => {

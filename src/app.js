@@ -18,6 +18,11 @@ import MongoStore from "connect-mongo"
 
 import passport from 'passport'
 import initializePassport from './config/passport.config.js'
+import config from './config/config.js';
+
+const port = config.port
+const mongoURL = config.mongoURL
+const mongoDBName = config.mongoDBName
 
 const app = express();
 
@@ -34,13 +39,13 @@ app.set("views",`${__dirname}/views`);
 app.use(
   session({
     store: MongoStore.create({
-      mongoUrl: 'mongodb+srv://cjcrr:cruz0606@cluster0606.qoy5tos.mongodb.net/ecommerce?retryWrites=true&w=majority',
-      dbName: "ecommerce",
+      mongoUrl: mongoURL,
+      dbName: mongoDBName,
       mongoOptions: {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       },
-      ttl: 200, // tiempo de visa de la sesión
+      ttl: 200,
     }),
     secret: "code",
     resave: true,
@@ -65,7 +70,7 @@ app.use((req, res) => {
 
 connectToDB()
 
-const httpServer = app.listen(8080, () => {
+const httpServer = app.listen(port, () => {
   console.log("Escuchando puerto 8080");
 });
 

@@ -1,18 +1,12 @@
 import { Router } from 'express';
-//import  ProductManager from "../dao/mongooseManager/products.dao.js";
-//import CartManager from '../dao/mongooseManager/carts.dao.js';
 import  productsModel  from '../dao/models/products.model.js';
 import  cartModel  from '../dao/models/carts.model.js';
-
-//const pm = new ProductManager()
-//const cm = new CartManager()
 
 const router = Router();
 
 
 router.get('/home', async (req, res) => {
   try {
-    //const products = await ProductModel.find().lean().exec();
     let pageNum = parseInt(req.query.page) || 1;
     let itemsPorPage = parseInt(req.query.limit) || 10;
     const products = await productsModel.paginate({}, { page: pageNum , limit: itemsPorPage , lean:true });

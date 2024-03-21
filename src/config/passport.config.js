@@ -4,6 +4,11 @@ import GithubStrategy from 'passport-github2';
 import UserModel from '../dao/models/user.model.js';
 import { hasAdminCredentials } from "../public/js/authMiddleware.js";
 import bcrypt from 'bcryptjs';
+import config from './config.js';
+
+// Datos de configuración de la estrategia de autenticación con Github
+const githubClientID = config.githubClientId;
+const githubClientSecret = config.githubClientSecret;
 
 const initializePassport = () => {
 
@@ -45,7 +50,6 @@ const initializePassport = () => {
         }
 
         // Almacenar toda la información del usuario en la sesión
-        // req.session.user = userNew;
 
         return done(null, newUser);
       } catch (error) {
@@ -85,8 +89,8 @@ const initializePassport = () => {
     }));
     
     passport.use('github', new GithubStrategy({
-        clientID: 'Iv1.facf4da275f5ac2e',
-        clientSecret: '49af1e14c9d879a72d99b4968caec65a47d12cdc',
+        clientID: githubClientID,
+        clientSecret: githubClientSecret,
         callbackURL: 'http://localhost:8080/api/sessions/githubcallback'
     }, async (accessToken, refreshToken, profile, done) => {
         console.log(profile)

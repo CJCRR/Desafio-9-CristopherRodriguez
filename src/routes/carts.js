@@ -1,13 +1,11 @@
 import { Router } from 'express';
-//import { CartManager } from '../dao/file/manager/cartManager.js';
-//import ProductManager from "../dao/mongooseManager/products.dao.js"
 import cartModel from '../dao/models/carts.model.js';
 import productsModel from '../dao/models/products.model.js';
 import User from '../dao/models/user.model.js';
 import { __dirname } from "../utils.js";
 
 
-//const cartManager = new CartManager('./src/dao/file/db/carts.json');
+
 
 const router = Router()
 
@@ -39,7 +37,6 @@ router.get("/:cid", async (req, res) => {
 
     res.status(200).json(productsWithInfo);
 
-    // res.status(200).json(cart.products);
   } catch (error) {
     console.log('Error al obtener los productos del carrito:', error);
     res.status(500).json({ error: 'Error en el servidor' });
@@ -64,7 +61,7 @@ router.post("/:cid/products/:pid", async (req, res) => {
     const productId = req.params.pid;
 
     // Obtén el usuario actual
-    const userId = req.session.user._id; // Obtener el ID del usuario de la sesión
+    const userId = req.session.user._id;
     const user = await User.findById(userId);
 
     const product = await productsModel.findById(productId).lean().exec();
