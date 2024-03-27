@@ -27,7 +27,7 @@ function updateProductList(listProducts) {
           </div>
           <div class="row">
             <a href="/realtimeproducts/${product._id}" class="btn btn-outline-primary col">Ver más</a>
-            <a class="btn btn-outline-primary col">Agregar</a>
+            <button class="btn btn-outline-primary col" onclick="addToCart('{{this._id}}')">Agregar</button>
           </div>
         </div>
       </div>

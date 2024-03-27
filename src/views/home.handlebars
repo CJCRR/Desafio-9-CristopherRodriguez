@@ -19,7 +19,7 @@
           </div>
           <div>
             <a href=/realtimeproducts/{{this._id}} class="btn btn-outline-primary col">Ver más</a>
-            <a href="" class="btn btn-outline-primary col">Agregar</a>
+            <button href="" class="btn btn-outline-primary col" onclick="addToCart('{{this._id}}')">Agregar</button>
           </div>
         </div>
       </div>
@@ -36,7 +36,43 @@
 </div>
 </div>
 
+<script>
+const addToCart = async (id) => {
+    // Crear el carrito si no existe en el almacenamiento local
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    if (!cart) {
+        // Si el carrito no existe, crear uno nuevo a través de una solicitud POST a la API
+        const response = await fetch(`/api/carts`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
 
+        // Analizar el JSON de la respuesta para obtener la información del nuevo carrito
+        const nuevoCarrito = await response.json();
+        cart = nuevoCarrito;
+
+        // Almacenar el nuevo carrito en el almacenamiento local
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Agregar el producto seleccionado al carrito mediante una solicitud POST a la API
+    const respuesta = await fetch(`/api/carts/${cart._id}/product/${id}`, {
+        method: 'POST'
+    });
+
+    // Verificar si la solicitud fue exitosa
+    if (!respuesta.ok) {
+        console.log('error');
+    }
+
+    // Mostrar una alerta indicando que el producto se ha agregado al carrito
+    alert('Agregado al carrito');
+    console.log(await respuesta.json());
+}
+
+</script>
 
 
 

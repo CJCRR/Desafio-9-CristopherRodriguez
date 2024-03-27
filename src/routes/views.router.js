@@ -18,7 +18,7 @@ router.get('/realtimeproducts', isAuthenticated, isAdmin, readViewsRealTimeProdu
 
 router.get('/realtimeproducts/:cid', isAuthenticated, readViewsProductController);
 
-router.get('/carts/:cid', isAuthenticated, readViewsCartController);
+router.get('/carts', isAuthenticated, readViewsCartController);
 
 router.get('/chat', readViewsChats);
 export default router;
