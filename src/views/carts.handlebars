@@ -6,9 +6,10 @@
     <ul>
         <h4>Productos agregados al carrito</h4>
         </br>
+        {{title}}
         {{#each products}}
         <li>
-            {{this.product}} - {{this.quantity}}
+            {{this.title}} - {{this.quantity}}
         </li>
         {{/each}}
     </ul>
